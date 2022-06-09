@@ -8,6 +8,7 @@ const App = () => {
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState("");
   const [query,setQuery] = useState("");
+  let result= ""
 
   useEffect(()=>{
     getRecipes();
@@ -35,16 +36,15 @@ const App = () => {
       <header className="header">
         <h1>Recipe Searcher</h1>
         <form onSubmit={getSearch} className="search-form">
-          <input className="input-search" type="text" value={search} onChange={updateSearch}></input>
+          <input className="input-search" type="text" value={search} onChange={updateSearch} placeholder="Enter text here"></input>
           <button className="btnSearch" type="submit">Search</button>
       </form>
       </header>
-      <main>
+      <main className="recipes-container">
         {recipes.map(recipe=>(
           <Recipes 
           key={recipe.recipe.label}
           title={recipe.recipe.label}
-          calories={recipe.recipe.calories}
           image={recipe.recipe.image}
           ingredients = {recipe.recipe.ingredients}
           url={recipe.recipe.url}

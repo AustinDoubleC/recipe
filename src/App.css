@@ -3,8 +3,41 @@ body{
   margin: 0px auto;
 }
 
-
-.btnSearch{
-  background-color: red;
+.header{
+  display: flex;
+  height: 70px;
+  background-color: #ECA325;
+  justify-content: space-around;
+  align-items: center;
+  color: #53382F;
 }
+
+.input-search{
+  font-size: 16px;
+  width: 300px;
+  border-radius: 5px;
+  height: 24px;
+}
+.btnSearch{
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #Fef7d8;
+  margin-left: 25px;
+  border: none;
+  padding: 5px 10px;
+}
+
+.recipes-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media screen and (max-width:800px){
+  .header{
+    flex-direction: column;
+    height: 120px;
+  }
+}
+
 
