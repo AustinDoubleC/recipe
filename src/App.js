@@ -7,8 +7,7 @@ const App = () => {
   const APP_KEY = "de9efc6166b8b86638b0df942bb06940";
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState("");
-  const [query,setQuery] = useState("");
-  let result= ""
+  const [query,setQuery] = useState("egg");
 
   useEffect(()=>{
     getRecipes();
@@ -17,8 +16,8 @@ const App = () => {
   const getRecipes = async () =>{
     const response = await fetch (`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`)
     const data = await response.json();
+    console.log(data)
     setRecipes (data.hits);
-    console.log(data.hits);
   }
 
   const updateSearch = e =>{
@@ -27,7 +26,9 @@ const App = () => {
 
   const getSearch = e =>{
     e.preventDefault();
-    setQuery(search)
+    if (search){
+      setQuery(search)
+    }
     setSearch("")
   }
 
@@ -36,17 +37,20 @@ const App = () => {
       <header className="header">
         <h1>Recipe Searcher</h1>
         <form onSubmit={getSearch} className="search-form">
+          <div id="search-container">
+          <button className="btnSearch" type="submit"><i className="fa-solid fa-magnifying-glass"></i></button>
           <input className="input-search" type="text" value={search} onChange={updateSearch} placeholder="Enter text here"></input>
-          <button className="btnSearch" type="submit">Search</button>
+          </div>
       </form>
       </header>
       <main className="recipes-container">
         {recipes.map(recipe=>(
           <Recipes 
-          key={recipe.recipe.label}
+          key={recipe.recipe.uri}
           title={recipe.recipe.label}
           image={recipe.recipe.image}
-          ingredients = {recipe.recipe.ingredients}
+          calories = {Math.round(recipe.recipe.calories)}
+          dishType = {recipe.recipe.dishType}
           url={recipe.recipe.url}
           />
         ))}
